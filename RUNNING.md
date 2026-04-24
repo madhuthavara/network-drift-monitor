@@ -1,4 +1,4 @@
-# Running network-drift-monitor on Chromebook (Penguin)
+# Running network-drift-monitor on Chromebook
 
 ## Step 1 — Open Linux terminal
 Open the Terminal app on your Chromebook (it runs Debian inside Penguin).
