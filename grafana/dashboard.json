@@ -1,0 +1,81 @@
+{
+  "title": "Network Drift Monitor",
+  "uid": "network-drift-monitor",
+  "timezone": "browser",
+  "panels": [
+    {
+      "id": 1,
+      "title": "Total BGP Drift by Device",
+      "type": "stat",
+      "gridPos": { "x": 0, "y": 0, "w": 12, "h": 4 },
+      "targets": [
+        {
+          "expr": "sum by (device) (network_drift_total{type=\"bgp\"})",
+          "legendFormat": "{{device}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "steps": [
+              { "color": "green", "value": 0 },
+              { "color": "red", "value": 1 }
+            ]
+          },
+          "color": { "mode": "thresholds" }
+        }
+      }
+    },
+    {
+      "id": 2,
+      "title": "Total Interface Drift by Device",
+      "type": "stat",
+      "gridPos": { "x": 12, "y": 0, "w": 12, "h": 4 },
+      "targets": [
+        {
+          "expr": "sum by (device) (network_drift_total{type=\"interface\"})",
+          "legendFormat": "{{device}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "steps": [
+              { "color": "green", "value": 0 },
+              { "color": "red", "value": 1 }
+            ]
+          },
+          "color": { "mode": "thresholds" }
+        }
+      }
+    },
+    {
+      "id": 3,
+      "title": "BGP Peer Drift Detail",
+      "type": "table",
+      "gridPos": { "x": 0, "y": 4, "w": 24, "h": 8 },
+      "targets": [
+        {
+          "expr": "network_bgp_peer_drift == 1",
+          "legendFormat": "{{device}} | {{peer_ip}} | expected: {{expected_state}} | actual: {{actual_state}}",
+          "instant": true
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Interface Drift Detail",
+      "type": "table",
+      "gridPos": { "x": 0, "y": 12, "w": 24, "h": 8 },
+      "targets": [
+        {
+          "expr": "network_interface_drift == 1",
+          "legendFormat": "{{device}} | {{interface}} | expected: {{expected_state}} | actual: {{actual_state}}",
+          "instant": true
+        }
+      ]
+    }
+  ],
+  "schemaVersion": 36,
+  "version": 1
+}
