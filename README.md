@@ -10,6 +10,27 @@ A Python-based network state drift detection tool that compares live BGP neighbo
 - Exposes drift metrics via a Prometheus HTTP endpoint
 - Includes a Grafana dashboard for visualization
 
+## Project Structure
+
+```
+network-drift-monitor/
+├── README.md
+├── requirements.txt
+├── config/
+│   └── devices.yaml          # device inventory
+├── nautobot/
+│   └── client.py             # Nautobot API queries
+├── collectors/
+│   ├── bgp.py                # Netmiko BGP neighbor pull
+│   └── interfaces.py         # interface state pull
+├── drift/
+│   └── comparator.py         # compare live vs intended state
+├── prometheus/
+│   └── exporter.py           # expose metrics endpoint
+├── grafana/
+│   └── dashboard.json        # importable Grafana dashboard
+└── main.py                   # entry point
+```
 ## Architecture
 
 ```
